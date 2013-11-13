@@ -5,4 +5,5 @@ group :test, :development do
   gem 'rspec'
   gem 'rake'
   gem 'pry'
+  gem 'ruby-prof'
 end

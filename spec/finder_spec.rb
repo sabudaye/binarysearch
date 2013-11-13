@@ -2,11 +2,9 @@ require 'spec_helper'
 
 describe Finder do
   before do
-    @input_array = (1..40).to_a
-    @delete_list = 2.times.map { rand(2..39) } # fixme, first last
-    @delete_list.each do |del|
-      @input_array.delete_at(@input_array.index(del))
-    end
+    @input_array = (1..100).to_a
+    @delete_list = 2.times.map { rand(2..99) } # fixme, first last
+    @delete_list.each { |del| @input_array.delete_at(@input_array.index(del)) }
     @finder = Finder.new(@input_array)
   end
 
