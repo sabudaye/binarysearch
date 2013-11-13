@@ -17,22 +17,29 @@ class Finder
   end
 
   def diff_case(array, count)
-    if @output.length != 2 && array.length > 1
-      is_on_middle?(array)
-      case diff_on_middle(array)
-        when 0
-          diff_case(second_half(array), count)
-        when 1
-          if count == 2
-            two_parts(array).each { |part| diff_case(part, 1) }
-          else
-            diff_case(first_half(array), 1)
-          end
-        when 2
-          diff_case(first_half(array), count)
-        else
-          raise "Count of missed numbers is over than 2"
-      end
+    return if stop_search?(array)
+    is_on_middle?(array)
+    case diff_on_middle(array)
+      when 0
+        diff_case(second_half(array), count)
+      when 1
+        search_on_halfs(array, count)
+      when 2
+        diff_case(first_half(array), count)
+      else
+        raise "Count of missed numbers is over than 2"
+    end
+  end
+
+  def stop_search?(array)
+    @output.length == 2 || array.length < 2
+  end
+
+  def search_on_halfs(array, count)
+    if count == 2
+      two_parts(array).each { |part| diff_case(part, 1) }
+    else
+      diff_case(first_half(array), 1)
     end
   end
 
