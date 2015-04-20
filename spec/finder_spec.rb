@@ -15,6 +15,6 @@ describe Finder do
   end
 
   it "Should return missed items" do
-    expect(@finder.search).to eq(@missed_items)
+    expect(@finder.search.sort).to eq(@missed_items.sort)
   end
 end
