@@ -1,6 +1,3 @@
-require 'bundler/setup'
-Bundler.require
-
 class Finder
   def initialize(arr)
     @arr = arr
