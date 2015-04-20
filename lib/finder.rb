@@ -10,6 +10,7 @@ class Finder
     search_recursive(@arr)
   end
 
+  private
   def search_recursive(arr, acc = [])
     if no_missed?(arr)
       acc
