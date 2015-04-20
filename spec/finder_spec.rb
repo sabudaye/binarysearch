@@ -2,13 +2,19 @@ require 'spec_helper'
 
 describe Finder do
   before do
-    @input_array = (1..100).to_a
-    @delete_list = 2.times.map { rand(2..99) } # fixme, first last
-    @delete_list.each { |del| @input_array.delete_at(@input_array.index(del)) }
+    k = 10000
+    @missed_items_num = 2
+    @input_array = (1..k).to_a
+    @missed_items = []
+    @missed_items_num.times do
+      sample = @input_array.sample
+      @missed_items.concat([sample])
+      @input_array.delete sample
+    end
     @finder = Finder.new(@input_array)
   end
 
-  it "should find items" do
-    expect(@finder.search.sort).to eq(@delete_list.sort)
+  it "Should return missed items" do
+    expect(@finder.search).to eq(@missed_items)
   end
 end

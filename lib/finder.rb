@@ -1,58 +1,27 @@
 require 'bundler/setup'
 Bundler.require
-require 'helper'
+require 'pry-byebug'
 
 class Finder
-  include Helper
-
-  def initialize(array)
-    @array = array
-    @output = []
-    @threads = []
+  def initialize(arr)
+    @arr = arr
   end
 
   def search
-    diff_case(@array, 2)
-    @output
+    search_recursive(@arr)
   end
 
-  def diff_case(array, count)
-    return if stop_search?(array)
-    is_on_middle?(array)
-    case diff_on_middle(array)
-      when 0
-        diff_case(second_half(array), count)
-      when 1
-        search_on_halfs(array, count)
-      when 2
-        diff_case(first_half(array), count)
-      else
-        raise "Count of missed numbers is over than 2"
-    end
-  end
-
-  def stop_search?(array)
-    @output.length == 2 || array.length < 2
-  end
-
-  def search_on_halfs(array, count)
-    if count == 2
-      two_parts(array).each { |part| diff_case(part, 1) }
+  def search_recursive(arr, acc = [])
+    if no_missed?(arr)
+      acc
     else
-      diff_case(first_half(array), 1)
+      missed_item = arr.bsearch { |x| arr.index(x) + arr.first != x } - 1
+      search_recursive(arr.slice(arr.index(missed_item + 1), arr.length),
+                       acc | [missed_item])
     end
   end
 
-  def is_on_middle?(array)
-    parts = two_parts(array)
-    diff = parts[1].first - parts[0].last
-    diff > 1 ? fill_output(parts[0].last, diff) : false
-  end
-
-  def fill_output(last_item, diff)
-    while diff > 1 do
-      diff -= 1
-      @output <<  (last_item + diff)
-    end
+  def no_missed?(arr)
+    arr.first + arr.rindex(arr.last) == arr.last
   end
 end
