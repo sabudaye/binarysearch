@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Finder do
   before do
     k = 10000
-    @missed_items_num = 2
+    @missed_items_num = rand(2..10)
     @input_array = (1..k).to_a
     @missed_items = []
     @missed_items_num.times do
