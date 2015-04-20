@@ -1,6 +1,5 @@
 require 'bundler/setup'
 Bundler.require
-require 'pry-byebug'
 
 class Finder
   def initialize(arr)
