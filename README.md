@@ -1,5 +1,5 @@
 ### Description
-Finder should find missing numbers inside sorted array of natural numbers using Array#bsearch
+Finder should find 2 skipped numbers inside sorted array of natural numbers using Array#bsearch
 
 ###Usage
 ```
