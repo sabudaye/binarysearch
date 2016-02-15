@@ -7,3 +7,8 @@ array = [1, 2, 3, 5, 6, 8]
 finder = Finder.new(array)
 finder.search # => [4, 7]
 ```
+
+###Testing
+```
+bundle exec rspec
+```
